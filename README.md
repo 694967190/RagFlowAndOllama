@@ -1,32 +1,66 @@
 # RagFlowAndOllama
 
-## 项目简介
+<div align="center">
 
-RagFlowAndOllama 是一个中继服务项目，旨在为Chatbox等Gpt-Gui提供调用Ollama大模型时添加知识库检索功能。该项目实现了RAG（检索增强生成）流程，通过结合本地知识库的内容来增强大模型的回答质量。
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org)
+[![RAGFlow](https://img.shields.io/badge/RAGFlow-Latest-green.svg)](https://github.com/infiniflow/ragflow)
+[![Ollama](https://img.shields.io/badge/Ollama-Latest-orange.svg)](https://github.com/ollama/ollama)
 
-## 项目产生原因
-由于RAGFlow的聊天功能太多问题，特此开发此项目
-项目原理是使用了ragflow的检索接口通过用户输入的数据在本地知识库中进行相似度检索，然后根据检索到的内容生成提示词，最后调用Ollama大模型生成回答。
+</div>
 
-## 主要功能
+## 📖 项目简介
 
-1. 接收用户输入并保持与Ollama API兼容的请求格式
-2. 基于用户输入在本地知识库中进行相似度检索
-3. 将检索到的知识库内容与用户问题组合，生成优化的提示词
-4. 调用Ollama大模型生成回答
-5. 保持与Ollama API一致的返回格式
+RagFlowAndOllama 是一个智能中继服务项目，为Chatbox等GPT图形界面工具提供知识库增强的Ollama调用能力。该项目实现了RAG（检索增强生成）流程，通过结合本地知识库的内容来提升大模型的回答质量。
 
-## 项目运行前提
-1.装有RAGFlow，并且运行在本地
-2.装有Ollama，并且运行在本地
-RAGFlow-git链接 https://github.com/infiniflow/ragflow
-Ollama-git链接 https://github.com/ollama/ollama
+## 🎯 项目特点
 
-## 技术架构
+- 完全兼容Ollama API的请求和响应格式
+- 无缝集成RAGFlow的知识库检索能力
+- 支持可配置的相似度阈值和权重
+- 提供标准化的错误处理和响应机制
 
-### API接口
+## ⚙️ 运行环境
 
-#### 1. 用户输入接口
+### 前置依赖
+
+1. [RAGFlow](https://github.com/infiniflow/ragflow)
+   - 需在本地运行RAGFlow服务
+   - 提供知识库检索能力
+
+2. [Ollama](https://github.com/ollama/ollama)
+   - 需在本地部署Ollama服务
+   - 提供大模型推理能力
+
+## 🚀 快速开始
+
+### 1. 安装依赖
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2. 配置环境变量
+
+创建 `.env` 文件并配置以下参数：
+```env
+KB_ID=<你的知识库ID>
+MODEL_NAME=<Ollama模型名称>
+MODEL_URL=<Ollama服务地址>
+```
+
+### 3. 运行服务
+
+```bash
+python main.py
+```
+
+## 📡 API接口
+
+### 1. 用户查询接口
+
+- 方法：`POST`
+- 格式：与Ollama API保持一致
+
 ```json
 {
     "model": "<model-name>",
@@ -44,10 +78,11 @@ Ollama-git链接 https://github.com/ollama/ollama
 }
 ```
 
-#### 2. 知识库检索接口
+### 2. 知识库检索接口
+
 - 端点：`http://127.0.0.1/v1/chunk/retrieval_test`
-- 方法：POST
-- 参数示例：
+- 方法：`POST`
+
 ```json
 {
     "similarity_threshold": 0.2,
@@ -61,27 +96,26 @@ Ollama-git链接 https://github.com/ollama/ollama
 }
 ```
 
-## 配置说明
+## 🔍 工作流程
 
-项目配置信息存储在`.env`文件中，包括：
-- 知识库ID (KB_ID)
-- Ollama模型名称 (MODEL_NAME)
-- Ollama服务地址 (MODEL_URL)
+1. 接收用户输入
+2. 调用RAGFlow知识库检索接口
+3. 处理检索结果并生成优化提示词
+4. 调用Ollama模型生成回答
+5. 返回标准格式响应
 
-## 注意事项
-- 确保本地知识库服务正常运行
+## ⚠️ 注意事项
+
+- 确保RAGFlow服务正常运行
+- 验证Ollama服务可用性
 - 正确配置环境变量
-- 检查Ollama服务的可用性
+- 定期检查知识库状态
 
-## 项目运行
+## 🤝 贡献指南
 
-1. 安装依赖
-```bash
-pip install -r requirements.txt
-```
+欢迎提交Issue和Pull Request来帮助改进项目。
 
-2. 运行项目
-```bash
-python main.py
-```
+## 📄 许可证
+
+[MIT License](LICENSE)
 
