@@ -43,9 +43,24 @@ pip install -r requirements.txt
 
 创建 `.env` 文件并配置以下参数：
 ```env
-KB_ID=<你的知识库ID>
-MODEL_NAME=<Ollama模型名称>
-MODEL_URL=<Ollama服务地址>
+# RAGFlow配置
+KB_ID=<你的知识库ID>                    # RAGFlow中的知识库ID
+RAGFLOW_URL=http://127.0.0.1           # RAGFlow服务地址
+RAGFLOW_PORT=80                        # RAGFlow服务端口
+
+# Ollama配置
+MODEL_NAME=qwen                        # Ollama模型名称，例如：qwen, llama2等
+MODEL_URL=http://127.0.0.1:11434      # Ollama服务地址和端口
+
+# 服务配置
+HOST=127.0.0.1                        # 服务监听地址
+PORT=8000                             # 服务监听端口
+DEBUG=True                            # 调试模式开关
+
+# 检索配置
+SIMILARITY_THRESHOLD=0.2               # 相似度阈值
+VECTOR_SIMILARITY_WEIGHT=0.8           # 向量相似度权重
+RETRIEVAL_TOP_K=5                     # 检索返回的最大结果数
 ```
 
 ### 3. 运行服务
@@ -118,4 +133,3 @@ python main.py
 ## 📄 许可证
 
 [MIT License](LICENSE)
-
