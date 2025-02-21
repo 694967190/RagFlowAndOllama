@@ -43,24 +43,19 @@ pip install -r requirements.txt
 
 创建 `.env` 文件并配置以下参数：
 ```env
-# RAGFlow配置
+# 知识库配置
 KB_ID=<你的知识库ID>                    # RAGFlow中的知识库ID
-RAGFLOW_URL=http://127.0.0.1           # RAGFlow服务地址
-RAGFLOW_PORT=80                        # RAGFlow服务端口
+KNOWLEDGE_BASE_URL=http://127.0.0.1/v1/chunk/retrieval_test  # 知识库检索接口地址
 
 # Ollama配置
-MODEL_NAME=qwen                        # Ollama模型名称，例如：qwen, llama2等
-MODEL_URL=http://127.0.0.1:11434      # Ollama服务地址和端口
+OLLAMA_MODEL=llama2                    # Ollama模型名称
+OLLAMA_URL=http://localhost:11434/api/chat  # Ollama API地址
 
-# 服务配置
-HOST=127.0.0.1                        # 服务监听地址
-PORT=8000                             # 服务监听端口
-DEBUG=True                            # 调试模式开关
-
-# 检索配置
-SIMILARITY_THRESHOLD=0.2               # 相似度阈值
-VECTOR_SIMILARITY_WEIGHT=0.8           # 向量相似度权重
-RETRIEVAL_TOP_K=5                     # 检索返回的最大结果数
+# 认证配置（可选）
+LOGIN_URL=http://127.0.0.1/v1/user/login  # 登录接口地址
+LOGIN_EMAIL=<你的邮箱>                   # 登录邮箱
+LOGIN_PASSWORD=<你的密码>                # 登录密码
+KNOWLEDGE_BASE_TOKEN=<认证token>         # 知识库认证token 填写登录邮箱和密码后自动更新
 ```
 
 ### 3. 运行服务
